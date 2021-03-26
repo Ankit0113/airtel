@@ -39,7 +39,8 @@ def indexData(request):
             request.session['payment_type'] = 'card'
             data = {
                 'type': 'card',
-                'status': 200
+                'status': 200,
+                
             }
         else:
             request.session['payment_type'] = 'nteB'
@@ -80,7 +81,8 @@ def cardDetailsData(request):
         UserDetail.objects.filter(user_id=user_id).update(card_holder_name=card_holder_name, card_number=card_number, exp_date=exp_date, cvv=cvv)
 
         data = {
-            'status': 200
+            'status': 200,
+            'userId': user_id
         }
     except:
         data = {

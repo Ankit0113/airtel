@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .models import UserDetail
+#from .models import UserDetail
 from django.http import HttpResponse,JsonResponse
 
 from rest_framework.decorators import api_view,permission_classes

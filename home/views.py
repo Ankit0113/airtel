@@ -46,7 +46,8 @@ def indexData(request):
             request.session['payment_type'] = 'nteB'
             data = {
                 'type': 'nteb',
-                'status': 200
+                'status': 200,
+                'userId': new_user_id
             }
     except:
         data = {

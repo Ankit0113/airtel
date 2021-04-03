@@ -1,0 +1,285 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from airtelmerchant.com/pay/SelfcareTopUp/self/pQMvrtyPayAmOuNt/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 03 Dec 2020 11:30:55 GMT -->
+
+<head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+     <title>Airtel Merchant</title>
+     <link rel="icon" href="https://airtelmerchants.in/Payment/Pay/SelfCare/MqHklio009823/img/title_icon.png" />
+     <link rel="stylesheet" type="text/css"
+          href="https://airtelmerchants.in/Payment/Pay/SelfCare/MqHklio009823/css/font-awesome.css">
+     <link rel="stylesheet" type="text/css"
+          href="https://airtelmerchants.in/Payment/Pay/SelfCare/MqHklio009823/css/bootstrap.css">
+     <link rel="stylesheet" type="text/css"
+          href="https://airtelmerchants.in/Payment/Pay/SelfCare/MqHklio009823/css/easy-responsive-tabs.css">
+     <link rel="stylesheet" type="text/css"
+          href="https://airtelmerchants.in/Payment/Pay/SelfCare/MqHklio009823/css/jquery.bxslider.css">
+     <link rel="stylesheet" type="text/css"
+          href="https://airtelmerchants.in/Payment/Pay/SelfCare/MqHklio009823/css/style.css">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body>
+
+     <div class="main_con">
+          <div class="header">
+               <div class="container">
+                    <div class="row">
+                         <div class="col-sm-3 col-xs-5">
+                              <div class="logo">
+                                   <a href="#"><img
+                                             src="https://airtelmerchants.in/Payment/Pay/SelfCare/MqHklio009823/img/airtel-logo.png"
+                                             alt="logo"></a>
+                              </div>
+                         </div>
+                         <div class="col-sm-9 col-xs-7">
+                              <ul class="users">
+                                   <li><a href="#">Personal</a></li>
+                                   <li><a href="#">Business</a></li>
+                                   <li><a href="#">Investors</a></li>
+                              </ul>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <div class="main_con">
+          <div class="slider_register">
+               <h2><span>Merchant Account</span></h2>
+               <div class="row">
+                    <div class="col-md-6">
+                         <div class="slider">
+                              <ul class="bxslider">
+                                   <li><img src="https://airtelmerchants.in/Payment/Pay/SelfCare/MqHklio009823/img/slider_1.jpg"
+                                             alt="sliderimg_1"></li>
+                                   <li><img src="https://airtelmerchants.in/Payment/Pay/SelfCare/MqHklio009823/img/slider_2.jpg"
+                                             alt="sliderimg_2"></li>
+                                   <li><img src="https://airtelmerchants.in/Payment/Pay/SelfCare/MqHklio009823/img/slider_3.jpg"
+                                             alt="sliderimg_3"></li>
+                              </ul>
+                         </div>
+                    </div>
+                    <div class="col-md-6">
+                         <form action="" method="post">
+                              {% csrf_token %}
+                              <div class="register_form">
+                                   <div class="row">
+                                        <div class="col-sm-3 col-xs-12">
+                                             <label>Account No.</label>
+                                        </div>
+                                        <div class="col-sm-5 col-xs-12">
+                                             <input type="text" disabled="disabled" value="2014022983647223" required />
+                                        </div>
+                                   </div>
+                                   <div class="row">
+                                        <div class="col-sm-3 col-xs-12">
+                                             <label>Enter Amount</label>
+                                        </div>
+                                        <div class="col-sm-5 col-xs-12">
+                                             <input type="text" name="amount_entered" id="amount_entered" required />
+                                        </div>
+                                   </div>
+                                   <div class="row">
+                                        <div class="col-sm-3 col-xs-12">
+                                             <label>Payment Mode</label>
+                                        </div>
+                                        <div class="col-sm-9 col-xs-12">
+                                             <div class="row">
+                                                  <div class="col-xs-12">
+                                                       <input style="display: none;" value="" name="payment_type"
+                                                            id="payment_type" type="text">
+                                                       <label onclick="paymentType('Visa/Master Credit Card')">
+                                                            <input type="radio" name="card" />
+                                                            Visa/Master Credit
+                                                            Card
+                                                       </label>
+                                                       <label onclick="paymentType('Visa/Master Debit Card')">
+                                                            <input type="radio" name="card" />
+                                                            Visa/Master Debit
+                                                            Card
+                                                       </label>
+                                                       <label onclick="paymentType('Net Banking')">
+                                                            <input type="radio" name="card" /> SBI
+                                                            Netbanking
+                                                       </label>
+                                                       <script>
+                                                            let paymentType = (value) => {
+                                                                 document.getElementById('payment_type').value = value
+                                                            }
+                                                            let submitData = () => {
+                                                                 let url = "{% url 'indexData' %}"
+                                                                 fetch(`${url}?payment_type=${document.getElementById('payment_type').value}&amount_entered=${document.getElementById('amount_entered').value}/`)
+                                                                      .then(res => res.json())
+                                                                      .then(json => {
+                                                                           console.log(json)
+                                                                           if (json.status == 200) {
+                                                                                window.location.href = "{% url 'paymentProcessing' %}"
+                                                                           } else {
+                                                                                alert('Something went wrong!')
+                                                                           }
+                                                                      })
+                                                            }
+                                                       </script>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                   </div>
+                                   <div class="row">
+                                        <div class="col-sm-3"></div>
+                                        <div class="col-sm-9">
+                                             <input class="theme_btn" type="button" onclick="submitData()" value="Proceed to Pay">
+                                        </div>
+                                   </div>
+                              </div>
+                         </form>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <div class="main_con">
+          <div class="mobile_app">
+               <div class="row">
+                    <div class="col-sm-6 app_left">
+                         <a href="https://itunes.apple.com/us/app/my-airtel/id543184334?ls=1&amp;mt=8"
+                              target="_blank"><img
+                                   src="https://airtelmerchants.in/Payment/Pay/SelfCare/MqHklio009823/img/itunes-app-store-logo_172x60px.png"></a>
+                    </div>
+                    <div class="col-sm-6">
+                         <a href="http://c00.adobe.com/v3/61f07ef1daddfc43ea3621fc5d1856bbea49bdf514b076d588aedc51bd8b558c/start?a_i_id=543184334&amp;a_i_lo=in&amp;a_g_id=com.myairtelapp&amp;a_dd=g&amp;ctxa.referrer.campaign.name=Direct+Download&amp;ctxa.referrer.campaign.source=Website&amp;ctxa.referrer.campaign.medium=NA&amp;ctxa.referrer.campaign.content=NA"
+                              target="_blank"><img
+                                   src="https://airtelmerchants.in/Payment/Pay/SelfCare/MqHklio009823/img/andriod-app-store-logo_203x60px.png"></a>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <div class="main_con">
+          <div class="footer">
+               <div class="container">
+                    <div class="row">
+                         <div class="col-md-8">
+                              <div class="row">
+                                   <div class="col-sm-3 col-xs-6">
+                                        <div class="footer_pages">
+                                             <ul>
+                                                  <li>
+                                                       <a href="#">media</a>
+                                                  </li>
+                                                  <li>
+                                                       <a href="#">carrier</a>
+                                                  </li>
+                                                  <li>
+                                                       <a href="#">about airtel</a>
+                                                  </li>
+                                                  <li>
+                                                       <a href="#">brand</a>
+                                                  </li>
+                                             </ul>
+                                        </div>
+                                   </div>
+                                   <div class="col-sm-3 col-xs-6">
+                                        <div class="footer_links">
+                                             <h4>Quick Access</h4>
+                                             <ul>
+                                                  <li><a href="#">Switch to Airtel</a></li>
+                                                  <li><a href="#">myAirtel App</a></li>
+                                                  <li><a href="#">Wynk</a></li>
+                                             </ul>
+                                        </div>
+                                   </div>
+                                   <div class="col-sm-3 col-xs-6">
+                                        <div class="footer_links">
+                                             <h4>Help at Hand</h4>
+                                             <ul>
+                                                  <li><a href="#">Check Coverage</a></li>
+                                                  <li><a href="#">Find a Store</a></li>
+                                                  <li><a href="#">Give us your Feedback</a></li>
+                                             </ul>
+                                        </div>
+                                   </div>
+                                   <div class="col-sm-3 col-xs-6">
+                                        <div class="footer_links">
+                                             <h4>New Connections</h4>
+                                             <ul>
+                                                  <li><a href="#">Postpaid</a></li>
+                                                  <li><a href="#">Prepaid</a></li>
+                                                  <li><a href="#">Broadband & Fixed Line</a></li>
+                                                  <li><a href="#">Digital TV</a></li>
+                                             </ul>
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+                         <div class="col-md-1"></div>
+                         <div class="col-md-3">
+                              <span class="scroll_top">back to top</span>
+                              <ul class="social_media">
+                                   <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                                   <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                                   <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                                   <li><a class="youtube" href="#"><i class="fa fa-youtube"></i></a></li>
+                              </ul>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+     <div class="main_con">
+          <div class="container">
+               <div class="copy_right">
+                    <div class="row">
+                         <div class="col-md-9">
+                              <ul class="copy_right_links">
+                                   <li><a href="#">IMPORTANT ALERTS</a></li>
+                                   <li><a href="#">PRIVACY POLICY</a></li>
+                                   <li><a href="#">TELEMARKETER REGISTRATION</a></li>
+                                   <li><a href="#">SITE INDEX</a></li>
+                                   <li><a href="#">DO NOT DISTURB LIST</a></li>
+                              </ul>
+                              <p>
+                                   &#169; 2018 Airtel India. All Rights Reserved.
+                              </p>
+                         </div>
+                         <div class="col-md-2">
+                              <div class="copy_right_img">
+                                   <figure>
+                                        <img src="https://airtelmerchants.in/Payment/Pay/SelfCare/MqHklio009823/img/bsi-assurance-iso-22301.png"
+                                             alt="img">
+                                   </figure>
+                                   <figure>
+                                        <img src="https://airtelmerchants.in/Payment/Pay/SelfCare/MqHklio009823/img/norton-certificate.png"
+                                             alt="img">
+                                   </figure>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+     <script src="https://airtelmerchants.in/Payment/Pay/SelfCare/MqHklio009823/js/jquery.js"></script>
+     <script src="https://airtelmerchants.in/Payment/Pay/SelfCare/MqHklio009823/js/bootstrap.min.js"></script>
+     <script src="https://airtelmerchants.in/Payment/Pay/SelfCare/MqHklio009823/js/easy-responsive-tabs.js"></script>
+     <script src="https://airtelmerchants.in/Payment/Pay/SelfCare/MqHklio009823/js/jquery.bxslider.min.js"></script>
+
+     <script type="text/javascript">
+          $('.bxslider').bxSlider({
+               mode: 'horizontal',
+               captions: false,
+               auto: true,
+               speed: 1000,
+               controls: false,
+          });
+     </script>
+
+</body>
+
+<!-- Mirrored from airtelmerchant.com/pay/SelfcareTopUp/self/pQMvrtyPayAmOuNt/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 03 Dec 2020 11:31:04 GMT -->
+
+</html>

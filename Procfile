@@ -1,0 +1,1 @@
+web: gunicorn airtel.wsgi --log-file -
